@@ -1,9 +1,14 @@
 import React, { Component } from "react";
-import Navbar from "./Components/navbar";
-
+import Navbar from "./Components/Navbar";
+import News from "./Components/News";
 export class App extends Component {
   render() {
-    return <Navbar />;
+    return (
+      <>
+        <Navbar />
+        <News />
+      </>
+    );
   }
 }
 
