@@ -3,8 +3,9 @@ import React, { Component } from "react";
 
 export class Navbar extends Component {
   static propTypes = {};
-
   render() {
+    let { updateValue } = this.props;
+
     return (
       <div>
         <nav
@@ -32,14 +33,77 @@ export class Navbar extends Component {
             >
               <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                 <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="/home">
+                  <a className="nav-link active" aria-current="page" href="#">
                     Home
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="/about">
+                  <a className="nav-link" href="#">
                     About
                   </a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    Select Category
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a
+                        class="dropdown-item"
+                        onClick={() => {
+                          updateValue("Apple");
+                        }}
+                      >
+                        Apple
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        class="dropdown-item"
+                        onClick={() => updateValue("Tesla")}
+                      >
+                        Tesla
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        class="dropdown-item"
+                        onClick={() => updateValue("business")}
+                      >
+                        Business-US
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        class="dropdown-item"
+                        onClick={() => updateValue("Tech")}
+                      >
+                        TechCrunch
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        class="dropdown-item"
+                        onClick={() => updateValue("bit")}
+                      >
+                        Bitcoin
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        class="dropdown-item"
+                        onClick={() => updateValue("head")}
+                      >
+                        Headlines
+                      </a>
+                    </li>
+                  </ul>
                 </li>
               </ul>
             </div>
