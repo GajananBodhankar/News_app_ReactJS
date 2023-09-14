@@ -6,13 +6,13 @@ export class News extends Component {
     super();
     this.state = {
       articles: [],
+      page: 1,
     };
   }
 
   async componentDidMount() {
     await fetch(
-      // "https://newsapi.org/v2/everything?q=bitcoin&apiKey=4fb7b2a328c3411dbfe120110d6a071e"
-      "https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=4fb7b2a328c3411dbfe120110d6a071e"
+      `https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=4fb7b2a328c3411dbfe120110d6a071e&page=${this.state.page}`
     )
       .then((response) => {
         if (response.status == 200) {
@@ -23,10 +23,16 @@ export class News extends Component {
       })
       .catch((e) => console.log(e));
   }
+
   async componentDidUpdate() {
+    console.log(this.state.page);
+    // if (this.props.category == "") {
+      // this.componentDidMount();
+    // } else 
     if (this.props.category == "Apple") {
+      // this.setState({ page: 1 });
       await fetch(
-        "https://newsapi.org/v2/everything?q=apple&from=2023-09-12&to=2023-09-12&sortBy=popularity&apiKey=4fb7b2a328c3411dbfe120110d6a071e"
+        `https://newsapi.org/v2/everything?q=apple&from=2023-09-12&to=2023-09-12&sortBy=popularity&apiKey=4fb7b2a328c3411dbfe120110d6a071e&page=${this.state.page?this.state.page:1}`
       )
         .then((response) => {
           if (response.status == 200) {
@@ -101,6 +107,16 @@ export class News extends Component {
 
   render() {
     let { category } = this.props;
+    // function Next() {
+    //   if (this.state.page >= 1) {
+    //     this.setState({ page: ++this.state.page });
+    //   }
+    // }
+    // function Prev() {
+    //   if (this.state.page > 1) {
+    //     this.setState({ page: --this.state.page });
+    //   }
+    // }
     return (
       <div className="container">
         <div className="row">
@@ -116,6 +132,21 @@ export class News extends Component {
               </div>
             );
           })}
+          {this.state.articles.length == 0 && (
+            <img
+              src="http://www.mediafactory.org.au/natalie-herbstreit/files/2014/10/the-end-2gt1jas.jpg"
+              alt=""
+            />
+          )}
+        </div>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <button type="button" class="btn btn-dark">
+            {`<- Prev`}
+          </button>
+          <button type="button" class="btn btn-dark">
+          {`Next ->`}
+
+          </button>
         </div>
       </div>
     );
